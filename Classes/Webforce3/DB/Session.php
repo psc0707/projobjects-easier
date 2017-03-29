@@ -67,7 +67,8 @@ class Session extends DbObject {
                             $row['ses_start_date'],
                             $row['ses_end_date'],                            
                             $row['ses_number'],                            
-                            new Location($row['location_loc_id']),
+                            //new Location($row['location_loc_id']),
+                            Location::get($row['location_loc_id']),
                             new Training($row['training_tra_id'])
                 );
                 return $currentObject;
@@ -107,7 +108,8 @@ class Session extends DbObject {
                                 $row['ses_start_date'],
                                 $row['ses_end_date'],
                                 $row['loc_name'],                                                
-                                new Location($row['location_loc_id']),
+                                //new Location($row['location_loc_id']),
+                                Location::get($row['location_loc_id']),
                                 new Training($row['training_tra_id'])
 				);
 				$returnList[] = $currentObject;
@@ -180,7 +182,8 @@ class Session extends DbObject {
                                 $row['ses_end_date'],
                                 $row['ses_number'],
                                 $row['loc_name'],                                                
-                                new Location($row['location_loc_id']),
+                                //new Location($row['location_loc_id']),
+                                Location::get($row['location_loc_id']),
                                 new Training($row['training_tra_id'])
                                 );
 				$returnList[] = $currentObject;

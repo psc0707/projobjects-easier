@@ -45,7 +45,9 @@ class City extends DbObject {
             $row = $stmt->fetch(\PDO::FETCH_ASSOC);
             if (!empty($row)) {
                 $currentObject = new City(
-                        $row['cit_id'], new Country($row['country_cou_id']), $row['cit_name']
+                        $row['cit_id'],
+                        new Country($row['country_cou_id']),
+                        $row['cit_name']
                 );
                 return $currentObject;
             }
@@ -116,12 +118,12 @@ class City extends DbObject {
         if ($this->id > 0) {
             $sql = '
 				UPDATE city
-				SET cit_name = :cit_name				
+				SET cit_name = :name				
 				WHERE cit_id = :id
 			';
             $stmt = Config::getInstance()->getPDO()->prepare($sql);
             $stmt->bindValue(':id', $this->id, \PDO::PARAM_INT);
-            $stmt->bindValue(':cit_name', $this->name);
+            $stmt->bindValue(':name', $this->name);
 
             if ($stmt->execute() === false) {
                 throw new InvalidSqlQueryException($sql, $stmt);
@@ -130,12 +132,12 @@ class City extends DbObject {
             }
         } else {
             $sql = '
-				INSERT INTO city (cit_name,country_cou_id)
-				VALUES (:cit_name,:country_cou_id)
+                        INSERT INTO city (cit_name,country_cou_id)
+                        VALUES (:name,:couid)
 			';
             $stmt = Config::getInstance()->getPDO()->prepare($sql);
-            $stmt->bindValue(':country_cou_id', $this->country->id, \PDO::PARAM_INT);
-            $stmt->bindValue(':cit_name', $this->name);
+            $stmt->bindValue(':couid', $this->country->id, \PDO::PARAM_INT);
+            $stmt->bindValue(':name', $this->name);
 
             if ($stmt->execute() === false) {
                 throw new InvalidSqlQueryException($sql, $stmt);
