@@ -113,12 +113,12 @@ class Country extends DbObject {
 		if ($this->id > 0) {
 			$sql = '
 				UPDATE country
-				SET cou_name = :cou_name				
+				SET cou_name = :name				
 				WHERE cou_id = :id
 			';
 			$stmt = Config::getInstance()->getPDO()->prepare($sql);
 			$stmt->bindValue(':id', $this->id, \PDO::PARAM_INT);			
-			$stmt->bindValue(':cou_name', $this->lname);
+			$stmt->bindValue(':name', $this->name);
 			
 			if ($stmt->execute() === false) {
 				throw new InvalidSqlQueryException($sql, $stmt);
@@ -130,10 +130,10 @@ class Country extends DbObject {
 		else {
 			$sql = '
 				INSERT INTO country (cou_name)
-				VALUES (:cou_name)
+				VALUES (:name)
 			';
 			$stmt = Config::getInstance()->getPDO()->prepare($sql);
-			$stmt->bindValue(':cou_name', $this->cou_name);			
+			$stmt->bindValue(':name', $this->name);			
 
 			if ($stmt->execute() === false) {
 				throw new InvalidSqlQueryException($sql, $stmt);
