@@ -24,6 +24,7 @@ $countriesList = Country::getAllForSelect();
 // Si modification d'une ville, on charge les données pour le formulaire
 if ($cityId > 0) {
 	$cityObject = City::get($cityId);
+        //print_r($cityObject);
 }
 
 // Si lien suppression

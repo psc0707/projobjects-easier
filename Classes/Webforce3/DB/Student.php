@@ -158,7 +158,7 @@ class Student extends DbObject {
 			FROM student
 			WHERE stu_id > 0
 			AND session_ses_id = :sessionId
-			ORDER BY stu_lastname ASC, s ASC
+			ORDER BY stu_lastname ASC, stu_firstname ASC
 		';
 		$stmt = Config::getInstance()->getPDO()->prepare($sql);
 		$stmt->bindValue(':sessionId', $sessionId, \PDO::PARAM_INT);
